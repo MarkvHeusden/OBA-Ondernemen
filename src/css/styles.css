@@ -1,1 +1,179 @@
+:root {
+	--page-bg: linear-gradient(to right, #00000033 0%, #fff 5%);
+	--border: 0.25rem solid #000;
+	--color-font: #000;
+	--border-radius: 0.4em;
+	--shadow: 0.5em 0.5em 0 #00000033;
+}
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
 
+h1 {
+	font-size: 1.75rem;
+	margin: 0.67rem 0;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin: 2rem 0 0.67rem;
+}
+
+p {
+	font-size: 0.9rem;
+	line-height: 1.25rem;
+}
+
+.all-books h1 {
+	font-size: 1.25rem;
+	margin: 0.5rem 0;
+}
+
+.all-books h2 {
+	font-size: 1rem;
+	margin: 1.5rem 0 0.5rem;
+}
+
+.all-books p {
+	font-size: 0.7rem;
+	line-height: 1rem;
+}
+
+body {
+	margin: 0;
+	height: 100vh;
+	color: var(--color-font);
+	font-family: "Avenir", sans-serif;
+}
+
+header {
+	position: fixed;
+	inset: 2rem 2rem auto;
+	height: 6rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	grid-template-columns: 1fr 1fr;
+	border: var(--border);
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
+	z-index: 10;
+	background-color: #fff;
+	padding: 0 2rem;
+}
+
+header img {
+	width: 6rem;
+	margin-right: auto;
+}
+
+button {
+	padding: 0.5em 3em;
+	border: var(--border);
+	border-radius: var(--border-radius);
+	color: var(--color-font);
+	background-color: #fff;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: inherit;
+	box-shadow: 0 0 0 #000;
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+	box-shadow: 0.4em 0.4em 0 #000;
+	transform: translate(-0.4em, -0.4em);
+}
+
+button:active {
+	box-shadow: 0 0 0 #000;
+	transform: translate(0, 0);
+}
+
+main {
+	margin-top: 6rem;
+	min-height: calc(100vh -6rem);
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	padding-bottom: 5rem;
+}
+
+.book {
+	width: 80vmin;
+	aspect-ratio: 5 / 4;
+	display: flex;
+	position: relative;
+	margin-top: 6rem;
+}
+
+.all-books {
+	width: 50vmin;
+	font-size: 50%;
+}
+
+.book-open {
+	/* box-shadow: var(--shadow); */
+}
+
+.book > * {
+	width: 50%;
+	margin-left: 50%;
+	position: absolute;
+	inset: 0;
+	border: var(--border);
+	border-left: none;
+	border-radius: var(--border-radius);
+	/* border-top-left-radius: 0;
+	border-bottom-left-radius: 0; */
+	background: var(--page-bg);
+}
+
+.book-cover {
+	transform-style: preserve-3d;
+	transform-origin: 0 0;
+	animation: turn-page 4s infinite alternate;
+	z-index: 1;
+}
+
+.book-cover img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center center;
+	backface-visibility: hidden;
+	background-color: #fff;
+}
+
+.book-details {
+	overflow-y: scroll;
+	padding: 1.5rem;
+	box-shadow: var(--shadow);
+	animation: page-shadow 4s infinite alternate;
+}
+
+.book-details h1,
+.book-details p:first-of-type {
+	text-align: center;
+}
+
+@keyframes turn-page {
+	0% {
+		transform: perspective(150vmin) rotateY(0deg);
+	}
+	100% {
+		transform: perspective(150vmin) rotateY(-180deg);
+	}
+}
+
+@keyframes page-shadow {
+	0% {
+		background-size: 2000%;
+	}
+	100% {
+		background-size: 100%;
+	}
+}
