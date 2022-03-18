@@ -4,6 +4,7 @@
 	--color-font: #000;
 	--border-radius: 0.4em;
 	--shadow: 0.5em 0.5em 0 #00000033;
+	--page-speed: 3s;
 }
 *,
 *::before,
@@ -95,7 +96,7 @@ button:active {
 
 main {
 	margin-top: 6rem;
-	min-height: calc(100vh -6rem);
+	min-height: calc(100vh - 6rem);
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
@@ -108,15 +109,15 @@ main {
 	display: flex;
 	position: relative;
 	margin-top: 6rem;
+	cursor: pointer;
+	transform: translateX(-25%);
+	transition: transform var(--page-speed);
 }
 
 .all-books {
-	width: 50vmin;
+	width: 25rem;
 	font-size: 50%;
-}
-
-.book-open {
-	/* box-shadow: var(--shadow); */
+	margin-right: 2rem;
 }
 
 .book > * {
@@ -127,16 +128,17 @@ main {
 	border: var(--border);
 	border-left: none;
 	border-radius: var(--border-radius);
-	/* border-top-left-radius: 0;
-	border-bottom-left-radius: 0; */
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 	background: var(--page-bg);
 }
 
 .book-cover {
 	transform-style: preserve-3d;
 	transform-origin: 0 0;
-	animation: turn-page 4s infinite alternate;
 	z-index: 1;
+	transform: perspective(150vmin) rotateY(0deg);
+	transition: transform var(--page-speed);
 }
 
 .book-cover img {
@@ -152,28 +154,23 @@ main {
 	overflow-y: scroll;
 	padding: 1.5rem;
 	box-shadow: var(--shadow);
-	animation: page-shadow 4s infinite alternate;
+	background-size: 2000%;
+	transition: background-size var(--page-speed);
+}
+
+.book-open {
+	transform: translateX(0%);
+}
+
+.book-open .book-cover {
+	transform: perspective(150vmin) rotateY(-180deg);
+}
+
+.book-open .book-details {
+	background-size: 100%;
 }
 
 .book-details h1,
 .book-details p:first-of-type {
 	text-align: center;
-}
-
-@keyframes turn-page {
-	0% {
-		transform: perspective(150vmin) rotateY(0deg);
-	}
-	100% {
-		transform: perspective(150vmin) rotateY(-180deg);
-	}
-}
-
-@keyframes page-shadow {
-	0% {
-		background-size: 2000%;
-	}
-	100% {
-		background-size: 100%;
-	}
 }

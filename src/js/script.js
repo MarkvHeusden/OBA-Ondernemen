@@ -12,7 +12,6 @@ function getBooks(type) {
         return response.json();
       })
       .then(data => {
-          console.log(data);
           showBook(data, type);
       })
       .catch(err => {
@@ -59,15 +58,17 @@ function showBook(data, type) {
 
   mainEl.innerHTML = markup;
 
-  // const bookEl = document.querySelector('.book');
-  // bookEl.addEventListener('click', function() {
-  //   bookEl.classList.toggle('book-open');
-  // });
+  const booksEl = document.querySelectorAll('.book');
+  booksEl.forEach((book) => {
+    book.addEventListener('click', function() {
+      book.classList.toggle('book-open')
+    })
+  });
 }
 
-// function openCloseBook(book) {
-//   book.classlist.toggle('book-open');
-// }
+function openCloseBook(book) {
+  book.classlist.toggle('book-open');
+}
 
 const randomButtonEl = document.querySelector('button');
 randomButtonEl.addEventListener('click', function() {
